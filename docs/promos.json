@@ -1,1 +1,106 @@
-{"checked_at":"1970-01-01T00:00:00+00:00","errors":0,"items":[]}
+{
+ "checked_at": "2026-11-22T14:06:08.695253+00:00",
+ "errors": 0,
+ "items": [
+  {
+   "name": "Cif Schoonmaakmiddel | Schuurcrème | Citrus",
+   "url": "https://www.delhaize.be/nl/shop/Onderhoud-en-huishouden/Schoonmaakproducten/Schuurmiddelen/Schoonmaakmiddel-Schuurcreme-Citrus/p/S2022032900616120000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/h84/h79/13740428787742.jpg?imwidth=300",
+   "offers": [
+    "1+1 gratis"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "2.15"
+  },
+  {
+   "name": "Delhaize Clementines",
+   "url": "https://www.delhaize.be/nl/shop/Verse-groenten-en-fruit/Vers-fruit/Citrusvruchten/Mandarijnen-and-Clementijnen/Clementines/p/F2022101100108550000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/h28/h84/14059576393758.jpg?imwidth=300",
+   "offers": [
+    "2de tegen -50%"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "2.19"
+  },
+  {
+   "name": "Delhaize Frietjes | Zoete aardappel",
+   "url": "https://www.delhaize.be/nl/shop/Diepvries/Frieten-en-aardappelproducten/Diepvriesfrieten/Frietjes-Zoete-aardappel/p/S2018101800126190000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/hbf/h18/14059359076382.jpg?imwidth=300",
+   "offers": [
+    "1+1 gratis"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": ""
+  },
+  {
+   "name": "Delhaize Kippen | borstfilet",
+   "url": "https://www.delhaize.be/nl/shop/Vlees-vis-en-vegetarische-producten/Gevogelte/Kip/Versneden-kip/Kippen-borstfilet/p/F2023122700129440000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/hb9/ha6/13735424655390.jpg?imwidth=300",
+   "offers": [
+    "1+1 gratis"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "9.69"
+  },
+  {
+   "name": "Delhaize Prinsessenbonen",
+   "url": "https://www.delhaize.be/nl/shop/Verse-groenten-en-fruit/Verse-groenten/Bonen-en-andere-peulvruchten/Prinsessenbonen/p/F1986053100310700000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/hbf/hed/13904120250398.jpg?imwidth=300",
+   "offers": [
+    "2de tegen -50%"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "2.19"
+  },
+  {
+   "name": "Delhaize Roodbaarsfilet",
+   "url": "https://www.delhaize.be/nl/shop/Vlees-vis-en-vegetarische-producten/Vis/Verse-vis/Witte-vissen/Roodbaarsfilet/p/F1981081100228900000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/hc0/h4b/13904639787038.jpg?imwidth=300",
+   "offers": [
+    "-20%"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "5.72"
+  },
+  {
+   "name": "Duvel Bier | 6,66% alc",
+   "url": "https://www.delhaize.be/nl/shop/Bieren-Alcohol-and-Alcoholvrij/Bieren/Degustatie-Bieren/Blond-Bieren/Bier-6-66-alc/p/S2020110600470400099",
+   "image": "https://static.delhaize.be/medias/sys_master/products/h83/h00/13541769871390.jpg?imwidth=300",
+   "offers": [
+    "2producten = gratis levering Van 18/11/2026 tot en met 25/11/2026",
+    "2producten = gratis levering"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": false,
+   "price": "7.09"
+  },
+  {
+   "name": "San Pellegrino Limonata | Light",
+   "url": "https://www.delhaize.be/nl/shop/Koude-en-warme-dranken/Frisdrank/Andere-bruisende-frisdranken/Citroen/Limonata-Light/p/S2024062100775680099",
+   "image": "https://static.delhaize.be/medias/sys_master/products/h92/h8f/13733630771230.jpg?imwidth=300",
+   "offers": [
+    "2de tegen -50%"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "6.49"
+  },
+  {
+   "name": "Sun Vaatwascapsules | Brillant Shine | 26t",
+   "url": "https://www.delhaize.be/nl/shop/Onderhoud-en-huishouden/Keuken/Afwasmachine/Vaatwascapsules-Brillant-Shine-26t/p/S2023051500701830000",
+   "image": "https://static.delhaize.be/medias/sys_master/products/hed/h45/13756502376478.jpg?imwidth=300",
+   "offers": [
+    "-66.66% voor 3"
+   ],
+   "valid_until": "2026-11-25",
+   "needs_card": true,
+   "price": "17.95"
+  }
+ ]
+}
