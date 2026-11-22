@@ -29,11 +29,17 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Add original logo and app icons to website
+      - name: Prepare square logo and app icons
         run: |
-          cp "Radar Lion Emblem.png" docs/logo.png
-          cp "Radar Lion Emblem.png" docs/icon-192.png
-          cp "Radar Lion Emblem.png" docs/icon-512.png
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from PIL import Image
+          source = Image.open("Radar Lion Emblem.png").convert("RGBA")
+          source.save("docs/logo.png", optimize=True)
+          source.resize((192, 192), Image.Resampling.LANCZOS).save("docs/icon-192.png", optimize=True)
+          source.resize((512, 512), Image.Resampling.LANCZOS).save("docs/icon-512.png", optimize=True)
+          source.resize((32, 32), Image.Resampling.LANCZOS).save("docs/favicon-32.png", optimize=True)
+          PY
       - name: Upload existing website and promotion data
         uses: actions/upload-pages-artifact@v3
         with:
