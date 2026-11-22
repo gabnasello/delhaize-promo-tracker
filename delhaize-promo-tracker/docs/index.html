@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Favorites on offer</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--card:#f4f4f2;--acc:#d6001c}
+@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#eee;--card:#242424}}
+body{margin:0;padding:16px;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif}
+h1{font-size:1.3rem;margin:0}.meta{opacity:.6;font-size:.85rem;margin:4px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.card{background:var(--card);border-radius:10px;padding:10px;text-decoration:none;color:inherit;display:block}
+.card img{width:100%;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:6px}
+.badge{display:inline-block;color:#fff;background:var(--acc);border-radius:6px;padding:1px 7px;font-size:.8rem;font-weight:600;margin:4px 4px 0 0}
+.name{font-size:.85rem;margin-top:4px}.price,.note{font-size:.75rem;opacity:.7;margin-top:2px}
+</style></head><body>
+<h1>Favorites on offer</h1>
+<div class="meta" id="meta">Loading…</div>
+<div class="grid" id="offer"></div>
+<script>
+fetch('promos.json').then(r=>r.json()).then(d=>{
+  const g=document.getElementById('offer');
+  d.items.forEach(i=>{
+    const a=document.createElement('a');a.className='card';a.href=i.url;a.target='_blank';a.rel='noopener';
+    const img=document.createElement('img');img.src=i.image||'';img.loading='lazy';img.alt='';
+    const n=document.createElement('div');n.className='name';n.textContent=i.name;
+    a.append(img,n);
+    if(i.price){const p=document.createElement('div');p.className='price';p.textContent='€ '+i.price;a.append(p);}
+    const bw=document.createElement('div');
+    i.offers.forEach(t=>{const b=document.createElement('span');b.className='badge';b.textContent=t;bw.append(b);});
+    a.append(bw);
+    if(i.valid_until){const [y,m,dd]=i.valid_until.split('-');const t=document.createElement('div');t.className='note';
+      t.textContent='until '+dd+'/'+m+(i.needs_card?' · SuperPlus card':'');a.append(t);}
+    g.append(a);
+  });
+  const when=new Date(d.checked_at);
+  document.getElementById('meta').textContent=(d.items.length?d.items.length+' on offer':'Nothing on offer')+
+    ' · checked '+(when.getFullYear()>1970?when.toLocaleString():'never');
+}).catch(()=>{document.getElementById('meta').textContent='No data yet.'});
+</script></body></html>

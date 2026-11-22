@@ -1,0 +1,16 @@
+# --- PERSONAL DATA: never commit ---
+data/favorites.csv
+checker/last_run_full.json
+saved_pages/*
+!saved_pages/.gitkeep
+*.htm
+*_files/
+.env
+*.env
+*cookies*
+state.json
+# --- local stuff ---
+.venv/
+checker/debug/
+__pycache__/
+*.pyc
