@@ -1,6 +1,8 @@
 """Reads saved Delhaize favorites-list pages (.htm/.html) and merges them into data/favorites.csv.
 Lists found in the given files replace the same lists in the CSV; other lists are kept."""
+import base64
 import csv
+import gzip
 import re
 import sys
 from pathlib import Path
@@ -10,6 +12,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).parent.parent
 CSV_PATH = ROOT / "data" / "favorites.csv"
 FIELDS = ["list", "name", "url", "image", "price_when_saved"]
+SECRET_PATH = ROOT / "data" / "favorites_secret.txt"
 
 
 def parse(path):
@@ -66,6 +69,10 @@ def main():
         w.writeheader()
         w.writerows(merged)
     print(f"Wrote {len(merged)} rows to {CSV_PATH}")
+    # GitHub secrets are limited to 48 KB: a compressed copy fits easily
+    packed = base64.b64encode(gzip.compress(CSV_PATH.read_bytes(), 9)).decode()
+    SECRET_PATH.write_text(packed, encoding="utf-8")
+    print(f"Wrote {SECRET_PATH} ({len(packed)} bytes): paste its content into the GitHub secret FAVORITES_CSV")
 
 
 if __name__ == "__main__":

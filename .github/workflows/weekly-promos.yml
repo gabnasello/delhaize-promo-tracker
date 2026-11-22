@@ -29,7 +29,10 @@ jobs:
           if [ -z "$FAVORITES_CSV" ]; then
             echo "::error::Secret FAVORITES_CSV is not set (Settings > Secrets and variables > Actions)"; exit 1
           fi
-          printf '%s\n' "$FAVORITES_CSV" > data/favorites.csv
+          # secret is gzip+base64 (data/favorites_secret.txt); plain CSV is accepted too
+          if ! printf '%s' "$FAVORITES_CSV" | base64 -d 2>/dev/null | gunzip > data/favorites.csv 2>/dev/null; then
+            printf '%s\n' "$FAVORITES_CSV" > data/favorites.csv
+          fi
       - run: python checker/check_promos.py
       - name: Commit results (keeps the schedule alive)
         run: |

@@ -1,5 +1,6 @@
 # --- PERSONAL DATA: never commit ---
 data/favorites.csv
+data/favorites_secret.txt
 checker/last_run_full.json
 saved_pages/*
 !saved_pages/.gitkeep

@@ -11,7 +11,8 @@ that are on offer. Read README.md and the workflow first, then help me bring it 
 2. Do whatever your GitHub access allows. For anything it does not (secrets, Pages settings, clicking Run workflow),
    give me the exact click path and wait for my "done":
    a. Settings > Secrets and variables > Actions > New repository secret: name FAVORITES_CSV, value = the full
-      content of my local favorites.csv (I paste it myself; do not ask me to share it with you).
+      content of my local favorites_secret.txt, a gzip+base64 copy of my favorites that the workflow decodes (I paste it
+      myself; do not ask me to share it with you).
    b. Settings > Pages > Build and deployment > Source = GitHub Actions.
    c. Actions tab > "Weekly promo check" > Run workflow (manual run first).
 3. Read the manual run's result. If it fails, diagnose from the logs (they intentionally show no product names) and
