@@ -1,7 +1,16 @@
-# Delhaize favorites: weekly offer tracker
+# Delhaize Tracker
 
-Every Thursday morning a GitHub Action checks your saved Delhaize favorites and publishes a small page
-(GitHub Pages) with **only the favorites that are on offer**, with image, offer text and end date.
+<p align="center">
+  <img src="docs/icon.svg" alt="Delhaize Tracker logo" width="220">
+</p>
+
+<p align="center">
+  <strong>Your Delhaize favourites, only when they're on offer.</strong><br>
+  <a href="https://gabnasello.github.io/delhaize-promo-tracker/">Open the live tracker</a>
+</p>
+
+Every Thursday morning a GitHub Action checks your saved Delhaize favourites and publishes a small page
+(GitHub Pages) with **only the favourites that are on offer**, with image, offer text and end date.
 
 ## Privacy design
 - The repo is public (needed for free GitHub Pages) but contains **no personal data**: your favorites live in the
@@ -15,8 +24,8 @@ Every Thursday morning a GitHub Action checks your saved Delhaize favorites and 
    Put the `.htm` files in `saved_pages/` (the list page itself, not the overview "Mijn boodschappenlijsten").
 2. Convert (isolated `.venv`, system Python untouched):
    ```powershell
-   powershell -ExecutionPolicy Bypass -File .\setup.ps1     # once
-   powershell -ExecutionPolicy Bypass -File .\extract.ps1
+   powershell -ExecutionPolicy Bypass -File .\\setup.ps1     # once
+   powershell -ExecutionPolicy Bypass -File .\\extract.ps1
    ```
    (Mac/Linux: `./setup.sh`, `./extract.sh`.) This creates `data/favorites.csv` and `data/favorites_secret.txt` (a compressed copy for the GitHub secret). Alternatively attach the `.htm` files
    to an AI such as Claude with the prompt in `tools/ai_prompt.md`.
@@ -24,8 +33,8 @@ Every Thursday morning a GitHub Action checks your saved Delhaize favorites and 
 
 ## 2. Test locally
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\test_local.ps1 5            # first 5 products
-powershell -ExecutionPolicy Bypass -File .\test_local.ps1 -Only "zoete aardappel"
+powershell -ExecutionPolicy Bypass -File .\\test_local.ps1 5            # first 5 products
+powershell -ExecutionPolicy Bypass -File .\\test_local.ps1 -Only "zoete aardappel"
 ```
 Runs the same checker as the Action, then serves http://localhost:8000. Full results (incl. non-offers and errors)
 are in `checker/last_run_full.json`; page HTML in `checker/debug/` (both git-ignored).

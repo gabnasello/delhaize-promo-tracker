@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
-<title id="title">Delhaize Tracker</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Delhaize Tracker</title><desc id="desc">A red stylised lion inside a blue radar with a golden target.</desc>
 <defs>
- <linearGradient id="bg" x1="70" y1="25" x2="440" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#123b68"/><stop offset="1" stop-color="#071d38"/></linearGradient>
- <linearGradient id="beam" x1="256" y1="256" x2="405" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#55b9ff" stop-opacity=".12"/><stop offset="1" stop-color="#1684e5" stop-opacity=".95"/></linearGradient>
- <clipPath id="disc"><circle cx="256" cy="256" r="218"/></clipPath>
+ <radialGradient id="disc" cx="68%" cy="24%" r="82%"><stop stop-color="#07518a"/><stop offset=".55" stop-color="#062d58"/><stop offset="1" stop-color="#06172f"/></radialGradient>
+ <linearGradient id="rim" x1="40" y1="40" x2="470" y2="470" gradientUnits="userSpaceOnUse"><stop stop-color="#72dcff"/><stop offset=".48" stop-color="#168de7"/><stop offset="1" stop-color="#43c5ff"/></linearGradient>
+ <linearGradient id="sweep" x1="256" y1="256" x2="425" y2="88" gradientUnits="userSpaceOnUse"><stop stop-color="#00baff" stop-opacity="0"/><stop offset="1" stop-color="#36d7ff" stop-opacity=".9"/></linearGradient>
+ <linearGradient id="lion" x1="135" y1="145" x2="380" y2="390" gradientUnits="userSpaceOnUse"><stop stop-color="#ff5145"/><stop offset=".48" stop-color="#f01820"/><stop offset="1" stop-color="#c90019"/></linearGradient>
+ <radialGradient id="target"><stop stop-color="#fff7bd"/><stop offset=".48" stop-color="#ffd34d"/><stop offset="1" stop-color="#f4a900"/></radialGradient>
+ <clipPath id="inside"><circle cx="256" cy="256" r="218"/></clipPath>
 </defs>
-<circle cx="256" cy="256" r="244" fill="url(#bg)"/>
-<g clip-path="url(#disc)" fill="none" stroke="#328dcc" stroke-linecap="round">
- <circle cx="256" cy="256" r="182" stroke-width="12" opacity=".95"/>
- <circle cx="256" cy="256" r="128" stroke-width="10" opacity=".78"/>
- <circle cx="256" cy="256" r="72" stroke-width="8" opacity=".62"/>
- <path d="M256 256 405 91A182 182 0 0 1 438 256Z" fill="url(#beam)" stroke="none"/>
- <path d="M256 256 405 91" stroke="#72c7ff" stroke-width="5" opacity=".8"/>
- <path d="M256 38v436M38 256h436" stroke-width="4" opacity=".45"/>
+<circle cx="256" cy="256" r="246" fill="#071a34"/>
+<circle cx="256" cy="256" r="237" fill="url(#disc)" stroke="url(#rim)" stroke-width="8"/>
+<g clip-path="url(#inside)" fill="none" stroke="url(#rim)">
+ <circle cx="256" cy="256" r="184" stroke-width="5" opacity=".95"/>
+ <circle cx="256" cy="256" r="126" stroke-width="4" opacity=".7"/>
+ <circle cx="256" cy="256" r="68" stroke-width="3" opacity=".45"/>
+ <path d="M256 256 421 91A232 232 0 0 1 488 256Z" fill="url(#sweep)" stroke="none"/>
+ <path d="M256 30v452M30 256h452" stroke-width="3" opacity=".62"/>
+ <path d="M256 256 421 91" stroke-width="3" opacity=".9"/>
 </g>
-<circle cx="392" cy="123" r="17" fill="#f5c95b"/>
-<g fill="#e1001a">
- <path d="M116 279 91 260 112 245 108 220 139 215 152 191 184 198 204 180 229 197 254 185 276 207 305 204 323 226 350 224 368 244 390 246 401 267 386 284 361 286 350 306 325 314 314 341 292 345 278 319 257 317 248 371 207 371 207 319 185 319 174 371 135 371 145 309 126 302Z"/>
- <path d="M337 239c30-20 42-42 44-70 1-14 12-24 26-23 14 1 21 14 16 27-9 26-22 52-46 73l-17 16Z"/>
- <path d="M116 254 84 250 71 264 92 273 118 271Z"/>
- <path d="M160 210 173 188 190 205 183 229 157 229Z M218 202 231 181 248 199 244 220 218 221Z M274 216 289 195 307 216 301 237 275 237Z"/>
+<circle cx="405" cy="120" r="26" fill="none" stroke="#f5b82e" stroke-width="3" opacity=".7"/>
+<circle cx="405" cy="120" r="15" fill="url(#target)"/>
+<!-- Original geometric lion silhouette -->
+<g fill="url(#lion)">
+ <path d="M111 201 91 184 119 174 112 151 154 151 171 132 210 140 229 124 254 143 285 137 302 158 333 159 349 181 379 184 393 208 379 229 357 233 348 253 326 260 313 283 292 291 281 275 264 272 250 322 223 347 206 389 164 389 181 337 157 334 133 389 91 389 117 321 97 302 121 272 109 251 124 233Z"/>
+ <path d="M278 178 305 151 342 154 368 174 388 195 379 222 355 232 333 215 310 212 292 229 273 218Z"/>
+ <path d="M334 155 352 131 379 132 396 148 384 170 360 174Z"/>
+ <path d="M119 174 98 166 91 180 111 193 132 188Z"/>
+ <path d="M143 150 153 126 177 136 174 158Z"/>
+ <path d="M190 142 209 119 231 137 220 159Z"/>
+ <path d="M232 321 255 310 276 320 263 389 224 389Z"/>
+ <path d="M294 276 321 263 343 280 370 306 354 337 328 318 306 315Z"/>
+ <path d="M360 231 386 221 407 236 394 260 369 260Z"/>
 </g>
-<path d="M102 251 130 251M140 232 159 232" stroke="#071d38" stroke-width="9" stroke-linecap="round"/>
+<path d="M104 187 128 187M139 172 158 172" stroke="#071a34" stroke-width="8" stroke-linecap="round"/>
+<path d="M174 145 188 145M220 151 234 151M314 183 335 183" stroke="#071a34" stroke-width="6" stroke-linecap="round"/>
+<path d="M105 210 123 215 138 209" fill="none" stroke="#ff8a70" stroke-width="4" stroke-linecap="round"/>
 </svg>
