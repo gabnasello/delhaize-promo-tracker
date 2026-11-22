@@ -1,9 +1,5 @@
 name: Weekly promo check
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "docs/promos.json" # avoid a second run when the scheduled job commits its results
   schedule:
     - cron: "0 5 * * 4"   # every Thursday 05:00 UTC = 06:00/07:00 Belgian time
   workflow_dispatch: {}   # manual run: Actions tab > Weekly promo check > Run workflow
