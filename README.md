@@ -1,7 +1,6 @@
 # Delhaize favorites: weekly offer tracker
 
-Every Thursday morning a GitHub Action checks your saved Delhaize favorites and publishes a small page
-(GitHub Pages) with **only the favorites that are on offer**, with image, offer text and end date.
+Every Thursday morning a GitHub Action checks your saved Delhaize favorites and publishes a small page (GitHub Pages) with **only the favorites that are on offer**, with image, offer text and end date.
 
 ## Privacy design
 - The repo is public (needed for free GitHub Pages) but contains **no personal data**: your favorites live in the
