@@ -1,6 +1,6 @@
-const CACHE_NAME = "delhaize-tracker-v3";
+const CACHE_NAME = "delhaize-tracker-v4";
 const BASE = new URL("./", self.registration.scope).pathname;
-const SHELL = [BASE, BASE + "index.html", BASE + "manifest.webmanifest", BASE + "logo.png", BASE + "icon-192.png", BASE + "icon-512.png"];
+const SHELL = [BASE, BASE + "index.html", BASE + "manifest.webmanifest", BASE + "logo.png", BASE + "icon-192.png", BASE + "icon-512.png", BASE + "favicon-32.png"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
