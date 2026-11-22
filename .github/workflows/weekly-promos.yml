@@ -1,5 +1,9 @@
 name: Weekly promo check
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "docs/promos.json" # avoid a second run when the scheduled job commits its results
   schedule:
     - cron: "0 5 * * 4"   # every Thursday 05:00 UTC = 06:00/07:00 Belgian time
   workflow_dispatch: {}   # manual run: Actions tab > Weekly promo check > Run workflow
@@ -21,7 +25,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt && playwright install --with-deps chromium
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Run Python unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Install Playwright browser
+        run: playwright install --with-deps chromium
       - name: Load private favorites from secret
         env:
           FAVORITES_CSV: ${{ secrets.FAVORITES_CSV }}
@@ -33,7 +42,8 @@ jobs:
           if ! printf '%s' "$FAVORITES_CSV" | base64 -d 2>/dev/null | gunzip > data/favorites.csv 2>/dev/null; then
             printf '%s\n' "$FAVORITES_CSV" > data/favorites.csv
           fi
-      - run: python checker/check_promos.py
+      - name: Check favorite promotions
+        run: python checker/check_promos.py
       - name: Commit results (keeps the schedule alive)
         run: |
           git config user.name "promo-bot"
