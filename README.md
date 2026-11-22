@@ -1,7 +1,7 @@
 # Delhaize Tracker
 
 <p align="center">
-  <img src="docs/icon.svg" alt="Delhaize Tracker logo" width="220">
+  <img src="Radar%20Lion%20Emblem.png" alt="Delhaize Tracker logo" width="220">
 </p>
 
 <p align="center">
