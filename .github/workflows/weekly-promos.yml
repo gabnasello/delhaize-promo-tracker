@@ -56,6 +56,11 @@ jobs:
               git push origin HEAD:main
             fi
           fi
+      - name: Add original logo and app icons to website
+        run: |
+          cp "Radar Lion Emblem.png" docs/logo.png
+          cp "Radar Lion Emblem.png" docs/icon-192.png
+          cp "Radar Lion Emblem.png" docs/icon-512.png
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs
