@@ -1,4 +1,4 @@
-const CACHE_NAME = "delhaize-tracker-v2";
+const CACHE_NAME = "delhaize-tracker-v3";
 const BASE = new URL("./", self.registration.scope).pathname;
 const SHELL = [BASE, BASE + "index.html", BASE + "manifest.webmanifest", BASE + "logo.png", BASE + "icon-192.png", BASE + "icon-512.png"];
 
