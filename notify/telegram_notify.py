@@ -90,6 +90,64 @@ def tg(token, method, payload):
             raise TgError(f"{method}: network error") from None
 
 
+def send_photo(token, chat, image_url, caption):
+    """Download the product image in the runner and upload it to Telegram."""
+    image_req = urllib.request.Request(
+        image_url,
+        headers={"User-Agent": "Mozilla/5.0 (compatible; DelhaizePromoTracker/1.0)"})
+    try:
+        with urllib.request.urlopen(image_req, timeout=30) as response:
+            image = response.read(9 * 1024 * 1024 + 1)
+            content_type = response.headers.get_content_type()
+    except urllib.error.HTTPError as e:
+        raise TgError(f"image download: HTTP {e.code}") from None
+    except (urllib.error.URLError, TimeoutError):
+        raise TgError("image download: network error") from None
+
+    if len(image) > 9 * 1024 * 1024:
+        raise TgError("image download: file exceeds Telegram photo limit")
+    if not content_type.startswith("image/"):
+        raise TgError("image download: response is not an image")
+
+    boundary = "----DelhaizeTelegramBoundary7MA4YWxkTrZu0gW"
+    parts = []
+    def field(name, value):
+        parts.append(
+            f"--{boundary}\r\n"
+            f'Content-Disposition: form-data; name="{name}"\r\n\r\n'
+            f"{value}\r\n".encode("utf-8")
+        )
+    field("chat_id", chat)
+    field("caption", caption)
+    field("parse_mode", "HTML")
+    parts.append(
+        f"--{boundary}\r\n"
+        'Content-Disposition: form-data; name="photo"; filename="product-image"\r\n'
+        f"Content-Type: {content_type}\r\n\r\n".encode("utf-8")
+        + image + b"\r\n"
+    )
+    body = b"".join(parts) + f"--{boundary}--\r\n".encode("ascii")
+    req = urllib.request.Request(
+        f"{API}/bot{token}/sendPhoto",
+        data=body,
+        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"}
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=45) as response:
+            result = json.load(response)
+    except urllib.error.HTTPError as e:
+        try:
+            info = json.loads(e.read().decode(errors="ignore"))
+        except Exception:
+            info = {}
+        raise TgError(f"sendPhoto: HTTP {e.code} {info.get('description', '')}") from None
+    except urllib.error.URLError:
+        raise TgError("sendPhoto: network error") from None
+    if not result.get("ok"):
+        raise TgError("sendPhoto: Telegram rejected the image")
+    return result
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="print instead of sending")
@@ -149,6 +207,8 @@ def main():
 
     message(render(cfg["header"]["text"], common))
     shown = items[: int(st.get("max_items", 15))]
+    photo_count = 0
+    text_fallback_count = 0
     for i in shown:
         vals = {**base,
                 "name": html.escape(i["name"]),
@@ -158,16 +218,28 @@ def main():
                 "card_note": "SuperPlus card required" if i.get("needs_card") else "",
                 "url": html.escape(i["url"], quote=True)}
         text = render(cfg["item"]["text"], vals)
-        if st.get("photos", True) and i.get("image", "").startswith("http"):
+        if st.get("photos", True) and i.get("image", "").startswith("https://"):
             try:
-                send("sendPhoto", {"photo": i["image"], "caption": text, "parse_mode": "HTML"})
+                if a.dry_run:
+                    print("--- sendPhoto ---")
+                    print(text)
+                    print("[product image will be downloaded and uploaded]")
+                else:
+                    send_photo(token, chat, i["image"], text)
+                    sent.append("sendPhoto")
+                    time.sleep(delay)
+                photo_count += 1
                 continue
             except TgError:
-                pass  # image not fetchable by Telegram: fall back to plain text
+                text_fallback_count += 1
         message(text)
     if len(items) > len(shown):
         message(render(cfg["more"]["text"], {**common, "remaining": str(len(items) - len(shown))}))
-    print(f"Sent {len(shown)} product message(s) for {len(items)} offers." if not a.dry_run else "")
+    print(
+        f"Sent {len(shown)} product message(s) for {len(items)} offers "
+        f"({photo_count} with photos, {text_fallback_count} text fallback(s))."
+        if not a.dry_run else ""
+    )
 
 
 if __name__ == "__main__":
