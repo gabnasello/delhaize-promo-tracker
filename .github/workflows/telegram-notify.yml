@@ -1,5 +1,8 @@
 name: Telegram notification
 on:
+  push:
+    paths:
+      - ".github/telegram-notify-test"
   workflow_run:                       # runs automatically after every "Weekly promo check"
     workflows: ["Weekly promo check"]
     types: [completed]
