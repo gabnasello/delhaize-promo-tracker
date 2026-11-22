@@ -1,0 +1,24 @@
+name: Telegram notification
+on:
+  workflow_run:                       # runs automatically after every "Weekly promo check"
+    workflows: ["Weekly promo check"]
+    types: [completed]
+  workflow_dispatch: {}               # manual test: sends the latest results in docs/promos.json
+permissions:
+  contents: read
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send Telegram message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SITE_URL: ${{ vars.SITE_URL }}                       # optional; default https://<owner>.github.io/<repo>/
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: python notify/telegram_notify.py

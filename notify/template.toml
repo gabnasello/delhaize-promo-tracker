@@ -1,0 +1,50 @@
+# Weekly Telegram message template. Edit freely and commit; the bot re-renders it every week.
+# Format: Telegram HTML (<b>bold</b>, <i>italic</i>, <a href="...">link</a>).
+# A line is dropped automatically when one of its {placeholders} is empty (e.g. no price known).
+#
+# Placeholders
+#   header / more / empty : {count} {checked_date} {site_url} {errors_note} {remaining}
+#   item                  : {name} {offers} {price} {until} {card_note} {url} {site_url}
+#   failed                : {run_url} {site_url}
+
+[settings]
+send_when_empty = true    # still send a short note when nothing is on offer
+send_on_failure = true    # send the "failed" message when the weekly check fails
+max_items = 15            # at most this many product messages; the rest is summarized in [more]
+photos = true             # one photo message per product (falls back to text if the image fails)
+
+[header]
+text = """
+🛒 <b>Delhaize favorites on offer</b>
+<b>{count}</b> of your favorites are on offer (checked {checked_date}).
+{errors_note}
+👉 <a href="{site_url}">See everything on the website</a>
+"""
+
+[item]
+text = """
+<b>{name}</b>
+🏷 {offers}
+💶 € {price}
+⏳ valid until {until}
+💳 {card_note}
+<a href="{url}">Open product</a>
+"""
+
+[more]
+text = """
+…and <b>{remaining}</b> more on the website: <a href="{site_url}">{site_url}</a>
+"""
+
+[empty]
+text = """
+🛒 <b>Delhaize favorites</b>
+Nothing on offer this week (checked {checked_date}).
+{errors_note}
+"""
+
+[failed]
+text = """
+⚠️ <b>Weekly Delhaize check failed.</b>
+Details: <a href="{run_url}">workflow run</a>
+"""
