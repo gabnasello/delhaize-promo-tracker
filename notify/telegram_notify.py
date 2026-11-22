@@ -112,20 +112,19 @@ def send_photo(token, chat, image_url, caption):
     boundary = "----DelhaizeTelegramBoundary7MA4YWxkTrZu0gW"
     parts = []
     def field(name, value):
-        parts.append(
+        parts.append((
             f"--{boundary}\r\n"
             f'Content-Disposition: form-data; name="{name}"\r\n\r\n'
-            f"{value}\r\n".encode("utf-8")
-        )
+            f"{value}\r\n"
+        ).encode("utf-8"))
     field("chat_id", chat)
     field("caption", caption)
     field("parse_mode", "HTML")
-    parts.append(
+    parts.append((
         f"--{boundary}\r\n"
         'Content-Disposition: form-data; name="photo"; filename="product-image"\r\n'
-        f"Content-Type: {content_type}\r\n\r\n".encode("utf-8")
-        + image + b"\r\n"
-    )
+        f"Content-Type: {content_type}\r\n\r\n"
+    ).encode("utf-8") + image + b"\r\n")
     body = b"".join(parts) + f"--{boundary}--\r\n".encode("ascii")
     req = urllib.request.Request(
         f"{API}/bot{token}/sendPhoto",
