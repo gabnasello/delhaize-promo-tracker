@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+<title id="title">Delhaize Tracker</title>
+<defs>
+ <linearGradient id="bg" x1="70" y1="25" x2="440" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#123b68"/><stop offset="1" stop-color="#071d38"/></linearGradient>
+ <linearGradient id="beam" x1="256" y1="256" x2="405" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#55b9ff" stop-opacity=".12"/><stop offset="1" stop-color="#1684e5" stop-opacity=".95"/></linearGradient>
+ <clipPath id="disc"><circle cx="256" cy="256" r="218"/></clipPath>
+</defs>
+<circle cx="256" cy="256" r="244" fill="url(#bg)"/>
+<g clip-path="url(#disc)" fill="none" stroke="#328dcc" stroke-linecap="round">
+ <circle cx="256" cy="256" r="182" stroke-width="12" opacity=".95"/>
+ <circle cx="256" cy="256" r="128" stroke-width="10" opacity=".78"/>
+ <circle cx="256" cy="256" r="72" stroke-width="8" opacity=".62"/>
+ <path d="M256 256 405 91A182 182 0 0 1 438 256Z" fill="url(#beam)" stroke="none"/>
+ <path d="M256 256 405 91" stroke="#72c7ff" stroke-width="5" opacity=".8"/>
+ <path d="M256 38v436M38 256h436" stroke-width="4" opacity=".45"/>
+</g>
+<circle cx="392" cy="123" r="17" fill="#f5c95b"/>
+<g fill="#e1001a">
+ <path d="M116 279 91 260 112 245 108 220 139 215 152 191 184 198 204 180 229 197 254 185 276 207 305 204 323 226 350 224 368 244 390 246 401 267 386 284 361 286 350 306 325 314 314 341 292 345 278 319 257 317 248 371 207 371 207 319 185 319 174 371 135 371 145 309 126 302Z"/>
+ <path d="M337 239c30-20 42-42 44-70 1-14 12-24 26-23 14 1 21 14 16 27-9 26-22 52-46 73l-17 16Z"/>
+ <path d="M116 254 84 250 71 264 92 273 118 271Z"/>
+ <path d="M160 210 173 188 190 205 183 229 157 229Z M218 202 231 181 248 199 244 220 218 221Z M274 216 289 195 307 216 301 237 275 237Z"/>
+</g>
+<path d="M102 251 130 251M140 232 159 232" stroke="#071d38" stroke-width="9" stroke-linecap="round"/>
+</svg>
