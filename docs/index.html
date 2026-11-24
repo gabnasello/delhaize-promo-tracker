@@ -45,7 +45,7 @@ footer{padding-top:22px;color:var(--muted);font-size:.75rem;text-align:center}
 <header>
 <img class="logo" src="logo.png" alt="" width="54" height="54">
 <div class="brand"><h1>Delhaize Tracker</h1><div class="tagline">Your favourites, only when they're on offer.</div></div>
-<button id="install" type="button" hidden>Install app</button>
+<button id="install" type="button" hidden>Install</button>
 </header>
 <section class="summary" aria-live="polite"><span id="meta">Loading offers…</span><span id="status"></span></section>
 <section class="grid" id="offers" aria-label="Favourites currently on offer"></section>
@@ -80,12 +80,27 @@ fetch('promos.json',{cache:'no-store'}).then(response=>{if(!response.ok)throw ne
 .then(render).catch(()=>{meta.textContent='Offers could not be loaded. Please try again later.';const empty=document.createElement('div');empty.className='empty';empty.textContent='The latest offer list is temporarily unavailable.';grid.replaceChildren(empty);});
 let installPrompt=null;
 const installButton=document.getElementById('install');
-const isIos=/iphone|ipad|ipod/i.test(navigator.userAgent);
 const isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
-if(isIos&&!isStandalone){installButton.hidden=false;installButton.addEventListener('click',()=>{status.textContent='To install: tap Share, then “Add to Home Screen”.';});}
-window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.hidden=false;});
-installButton.addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true;});
-window.addEventListener('appinstalled',()=>{installButton.hidden=true;status.textContent='App installed';});
+if(isStandalone)installButton.hidden=true;
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  if(isStandalone)return;
+  installPrompt=event;
+  installButton.hidden=false;
+});
+installButton.addEventListener('click',async()=>{
+  if(!installPrompt)return;
+  const prompt=installPrompt;
+  installPrompt=null;
+  installButton.hidden=true;
+  await prompt.prompt();
+  const choice=await prompt.userChoice;
+  if(choice.outcome!=='accepted'&&!isStandalone)installButton.hidden=false;
+});
+window.addEventListener('appinstalled',()=>{
+  installPrompt=null;
+  installButton.hidden=true;
+});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));}
 </script>
 </body>
