@@ -1,7 +1,10 @@
 name: Weekly promo check
 on:
   schedule:
-    - cron: "0 5 * * 4"   # every Thursday 05:00 UTC = 06:00/07:00 Belgian time
+    - cron: "17 3 * * 4"   # every Thursday 03:17 UTC
+  push:
+    paths:
+      - ".github/weekly-promos-test"
   workflow_dispatch: {}   # manual run: Actions tab > Weekly promo check > Run workflow
 permissions:
   actions: read
